@@ -2,3 +2,7 @@ expe_log
 data
 .env
 __pycache__
+env
+venv
+projetenv
+projet_env

@@ -1,0 +1,30 @@
+name: Nettoyage des notebooks
+
+on:  # Déclencheur : quand on pousse du code ou ouvre une PR
+  pull_request:
+  push:
+    branches:
+      - main  # Change ça si ton branch principal a un autre nom
+
+jobs:
+  clean_notebooks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du repo
+        uses: actions/checkout@v4
+
+      - name: Installer Python et nbstripout
+        run: |
+          python -m pip install --upgrade pip
+          pip install nbstripout
+
+      - name: Appliquer nbstripout à tous les notebooks
+        run: |
+          find . -name "*.ipynb" -exec nbstripout {} \;
+
+      - name: Commit des notebooks nettoyés
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -am "🧹 Auto-nettoyage des notebooks" || echo "Aucun changement détecté"
+          git push || echo "Rien à pousser"

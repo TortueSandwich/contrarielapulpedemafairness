@@ -323,7 +323,7 @@ def plot_patient_age_distribution(df, max_diseases_per_plot=18):
        
         fig = px.box(df_subset, x="Disease", y="Patient Age", 
                      labels={"Patient Age": "Âge du patient", "Disease": "Maladie"},
-                     title=f"Distribution de l'âge des patients par maladie",
+                     title="Distribution de l'âge des patients par maladie",
                      color="Disease")  
         fig.update_layout(xaxis_tickangle=-45)
 

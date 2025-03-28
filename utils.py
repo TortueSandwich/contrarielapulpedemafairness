@@ -2,6 +2,7 @@ import os
 import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
+import numpy as np
 import math
 from aif360.datasets import BinaryLabelDataset
 import pandas as pd
@@ -328,6 +329,28 @@ def plot_patient_age_distribution(df, max_diseases_per_plot=18):
         fig.update_layout(xaxis_tickangle=-45)
 
         fig.show()
+
+def jaccardmatrix(df):
+    jaccard_matrix = np.zeros((len(maladies), len(maladies)))
+    for i, disease1 in enumerate(maladies):
+        for j, disease2 in enumerate(maladies):
+            intersection = np.logical_and(df[disease1], df[disease2]).sum()
+            union = np.logical_or(df[disease1], df[disease2]).sum()
+            jaccard_matrix[i, j] = intersection / union if union != 0 else 0
+
+    jaccard_df = pd.DataFrame(jaccard_matrix, index=maladies, columns=maladies)
+    fig = go.Figure(data=go.Heatmap(
+        z=jaccard_df.values,
+        x=jaccard_df.columns,
+        y=jaccard_df.index,
+        colorscale='Blues'
+    ))
+    fig.update_layout(title='Disease Co-Occurrence Matrix (Jaccard Distance)',
+                      xaxis_title='Disease',
+                      yaxis_title='Disease',
+                      xaxis=dict(tickangle=-45),
+                      width=800, height=800)
+    fig.show()
 
 if __name__ == "__main__":
     load_env_file()

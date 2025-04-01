@@ -3,6 +3,8 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import math
+from aif360.datasets import BinaryLabelDataset
+import pandas as pd
 
 
 RNG_SEED = 2025

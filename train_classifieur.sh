@@ -7,4 +7,4 @@ python train_classifieur.py\
  --datadir ./"$DATA_DIR"/\
  --csv ./"$DATA_DIR"/metadata.csv\
  --weights_col WEIGHTS\
- --csv_out ./expe_log/preds.csv
+ --csv_out ./expe_log/base_preds.csv

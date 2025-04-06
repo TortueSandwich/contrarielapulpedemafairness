@@ -6,3 +6,4 @@ env
 venv
 projetenv
 projet_env
+*.ipynb_checkpoints

@@ -4,10 +4,7 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import numpy as np
 import math
-<<<<<<< HEAD
 from aif360.datasets import BinaryLabelDataset
-=======
->>>>>>> Arthur
 import pandas as pd
 from constants import *
 
